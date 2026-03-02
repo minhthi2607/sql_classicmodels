@@ -1,4 +1,4 @@
-/*
+git /*
   Name: MySQL Sample Database classicmodels
   Link: http://www.mysqltutorial.org/mysql-sample-database.aspx
 */
@@ -154,4 +154,23 @@ alter table customers add index idx_customername(customername);
 explain select * from customers where customername = 'land of toys inc';
 alter table customers add index idx_fullname(contactfirstname, contactlastname);
 EXPLAIN SELECT * FROM customers WHERE contactFirstName = 'Jean' or contactFirstName = 'King';
-alter table customers drop index idx_fullname;
+-- alter table customers drop index idx_fullname;
+
+DELIMITER //
+create procedure  findallcustomer()
+begin 
+select * from customers;
+end //
+DELIMITER ;
+
+call findallcustomer();
+
+DELIMITER //
+drop procedure if exists `findallcustomers` //
+create procedure findallcustomers()
+begin 
+select * from customers where customerNumber = 175;
+end //
+delimiter ;
+
+call findallcustomers();
