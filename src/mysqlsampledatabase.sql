@@ -247,3 +247,17 @@ CALL SetCounter(@counter,1); -- 3
 CALL SetCounter(@counter,5); -- 8
 
 SELECT @counter; -- 8
+
+create view customer_views as
+select customernumber, customername, phone
+from customers;
+
+select * from customer_views;
+
+create or replace view customer_views as
+select customernumber, customername, contactfirstname, contactlastname, phone
+from customers
+where city = 'nantes';
+
+drop view customer_views;
+
